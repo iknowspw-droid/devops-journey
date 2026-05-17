@@ -1,1 +1,2 @@
 learning my 1st chapter of devops series
+Main Branch says : red 
