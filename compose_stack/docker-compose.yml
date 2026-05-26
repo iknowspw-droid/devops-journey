@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  web-server:
+    image: nginx:alpine
+    container_name: web_frontend
+    ports:
+      - "8080:80"
+    networks:
+      - stack-net
+
+  database:
+    image: postgres:alpine
+    container_name: db_backend
+    environment:
+      POSTGRES_PASSWORD: "super_secure_pass"
+    networks:
+      - stack-net
+
+networks:
+  stack-net:
+    driver: bridge
