@@ -4,6 +4,10 @@ on:
   push:
     branches: [ "main" ]
 
+# FIX FOR WARNING: Purani Node.js warning ko bypass karne ke liye environment variable
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   build-and-ship:
     runs-on: ubuntu-latest
@@ -21,6 +25,7 @@ jobs:
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v5
         with:
-          context: ./compose_stack
+          # FIX FOR ERROR: Hum multi_stage_app folder ka rasta de rahe hain jahan asli Dockerfile hai
+          context: ./multi_stage_app
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/lean-app:v1
